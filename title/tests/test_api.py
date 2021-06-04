@@ -12,7 +12,6 @@ from title.serializers import (
 
 User = get_user_model()
 
-
 class GenresApiTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create(
@@ -112,7 +111,6 @@ class TitleApiTestCase(APITestCase):
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
         self.assertEqual(2, Title.objects.all().count())
         new_title = Title.objects.all().first()
-        #serializer_data = TitleSerializer(new_title).data
         self.assertEqual('Поворот туда', new_title.name)
         self.assertEqual(2000, new_title.year)
 

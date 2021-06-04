@@ -14,8 +14,8 @@ from title.serializers import (
     CommentSerializer,
     GenreSerializer,
     ReviewSerializer,
-    TitleSerializer,
     TitleCreateSerializer,
+    TitleSerializer,
 )
 
 User = get_user_model()
