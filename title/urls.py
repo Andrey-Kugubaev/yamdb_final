@@ -9,6 +9,7 @@ from title.views import (
     TitlesViewSet,
 )
 
+
 title_router = DefaultRouter()
 title_router.register('titles', TitlesViewSet, basename='titles')
 title_router.register('genres', GenresViewSet, basename='genres')

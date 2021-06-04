@@ -1,22 +1,20 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
-from django.utils.crypto import get_random_string
+#from django.shortcuts import get_object_or_404
+#from django.utils.crypto import get_random_string
 
 from rest_framework import (
     filters, permissions, status, viewsets,
 )
 from rest_framework.decorators import action
-from rest_framework.generics import (
-    RetrieveUpdateAPIView,
-    RetrieveUpdateDestroyAPIView,
-)
+#from rest_framework.generics import (
+#    RetrieveUpdateAPIView,
+#    RetrieveUpdateDestroyAPIView,
+#)
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from .models import CustomUser
 from .paginators import APIPagination
 from .permissions import IsAdmin

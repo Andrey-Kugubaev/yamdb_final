@@ -1,16 +1,14 @@
 from django.urls import include, path
-
 from rest_framework.routers import DefaultRouter
-
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView,
                                             )
-
 from auth_user.views import (
     APIAuthCodeRequestViewSet,
     APIAuthConfirm,
     APIUserProfileViewSet,
 )
+
 
 users_router = DefaultRouter()
 users_router.register('users', APIUserProfileViewSet, basename='users')

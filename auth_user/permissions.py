@@ -9,6 +9,6 @@ class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated:
             return bool(
-                (request.user.role == Roles.ADMIN) or
-                (request.user.is_staff and request.user.is_superuser)
+                (request.user.role == Roles.ADMIN)
+                or (request.user.is_staff and request.user.is_superuser)
             )
