@@ -2,7 +2,7 @@ import datetime
 from rest_framework import serializers
 from rest_framework import status
 from rest_framework.serializers import ModelSerializer
-from title.models import Comment, Review, Title, Genre, Category
+from title.models import Category, Comment, Genre, Review, Title
 
 
 class GenreSerializer(ModelSerializer):
