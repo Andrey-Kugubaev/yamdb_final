@@ -10,15 +10,9 @@ from title.custom_viewset_models import WithNoDetails
 from title.filters import TitleFilter
 from title.models import Category, Genre, Review, Title
 from title.permissions import IsStaffOrReadOnly, IsYAMDBPermission
-from title.serializers import (
-    CategorySerializer,
-    CommentSerializer,
-    GenreSerializer,
-    ReviewSerializer,
-    TitleCreateSerializer,
-    TitleSerializer
-)
-
+from title.serializers import (CategorySerializer, CommentSerializer,
+                               GenreSerializer, ReviewSerializer,
+                               TitleCreateSerializer, TitleSerializer)
 
 User = get_user_model()
 

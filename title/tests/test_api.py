@@ -4,12 +4,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from title.models import Category, Genre, Review, Title
-from title.serializers import (
-    GenreSerializer,
-    ReviewSerializer,
-    TitleSerializer,
-)
-
+from title.serializers import (GenreSerializer, ReviewSerializer,
+                               TitleSerializer)
 
 User = get_user_model()
 

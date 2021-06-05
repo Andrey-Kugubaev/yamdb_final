@@ -1,9 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-from rest_framework import (
-    filters, permissions, status, viewsets,
-)
+from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,11 +10,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import CustomUser
 from .paginators import APIPagination
 from .permissions import IsAdmin
-from .serializers import (
-    APIUserSerializer,
-    ConfirmationSerializer,
-    CustomUserSerializer,
-)
+from .serializers import (APIUserSerializer, ConfirmationSerializer,
+                          CustomUserSerializer)
 
 
 @action(detail=True, methods=['POST'])
