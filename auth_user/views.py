@@ -36,9 +36,8 @@ class APIAuthCodeRequestViewSet(viewsets.ModelViewSet):
         serializer = CustomUserSerializer(user)
         user.save()
         send_mail(f'YAMDB confirmation code for {username}',
-                  f'Hi, {username}!\n\n'
-                  + f'You confirmation code is: {confirmation_code}\n\n'
-                  + f'---\nYAMDB',
+                  f'Hi, {username}! You confirmation\n\n'
+                  + f'code is: {confirmation_code} ---\nYAMDB\n\n',
                   settings.EMAIL_AUTH, [email])
         return Response(
             {'status': 'The authorization letter was sent by email.'}

@@ -12,3 +12,4 @@ class IsAdmin(permissions.BasePermission):
                 (request.user.role == Roles.ADMIN)
                 or (request.user.is_staff and request.user.is_superuser)
             )
+        pass
