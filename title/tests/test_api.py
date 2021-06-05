@@ -10,6 +10,7 @@ from title.serializers import (
     TitleSerializer,
 )
 
+
 User = get_user_model()
 
 

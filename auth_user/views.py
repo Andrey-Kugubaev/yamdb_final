@@ -1,5 +1,5 @@
-from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
+from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from rest_framework import (
     filters, permissions, status, viewsets,
@@ -8,6 +8,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+
 from .models import CustomUser
 from .paginators import APIPagination
 from .permissions import IsAdmin
@@ -40,9 +41,9 @@ class APIAuthCodeRequestViewSet(viewsets.ModelViewSet):
         serializer = CustomUserSerializer(user)
         user.save()
         send_mail(f'YAMDB confirmation code for {username}',
-                  f'Hi, {username}!\n\n' +
-                  f'You confirmation code is: {confirmation_code}\n\n' +
-                  f'---\nYAMDB',
+                  f'Hi, {username}!\n\n'
+                  + f'You confirmation code is: {confirmation_code}\n\n'
+                  + f'---\nYAMDB',
                   settings.EMAIL_AUTH, [email])
         return Response(
             {'status': 'The authorization letter was sent by email.'}
@@ -64,11 +65,11 @@ class APIAuthConfirm(APIView):
                 api_confirmation_code = request.data['confirmation_code']
                 if api_confirmation_code == user.confirmation_code:
                     refresh = RefreshToken.for_user(user)
-                    JWT = {
+                    jwt = {
                         'refresh': str(refresh),
                         'access': str(refresh.access_token)
                     }
-                    return Response(JWT, status=status.HTTP_200_OK)
+                    return Response(jwt, status=status.HTTP_200_OK)
             msg = {
                 'detail': 'Wrong email/confirmation code, or user not found.'
             }
