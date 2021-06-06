@@ -8,44 +8,30 @@ volumes:
 services:
   db:
     image: postgres:12.4
-    ontainer_name: db
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: db
-    ports:
-      - "${DB_PORT:-5432}:5432"
     env_file:
       - ./.env
   web:
-    build: .
+    image: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest
+    container_name: web
     restart: always
-    command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
-    environment:
-      #DJANGO_SETTINGS_MODULE: "project.settings.development"
-      DEBUG: 1
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: db
-    ports:
-      - "8000:8000"
     volumes:
       - static_value:/code/static/
       - nginx:/code/nginx/
+    expose:
+      - 8000
     depends_on:
       - db
     env_file:
       - ./.env
   nginx:
     image: nginx:1.19.3
-    ports:
-      - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_value:/var/html/static/
+      - static_volume:/static/
+      - nginx:/etc/nginx/conf.d/
+    ports:
+      - 80:80
     depends_on:
       - web
