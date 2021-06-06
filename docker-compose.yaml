@@ -1,20 +1,16 @@
-# версия docker-compose
 version: '3.8'
 
-# имя директории для хранения данных
 volumes:
-  postgres_data:  # это название директории для хранения данных БД
+  postgres_data:
+  static_volume:
+  nginx:
 
-# имена и описания контейнеров, которые должны быть развёрнуты
 services:
-  # описание контейнера db
   db:
-    # образ, из которого должен быть запущен контейнер
     image: postgres:12.4
-    # volume и связанная с ним директория в контейнере
+    ontainer_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    # адрес файла, где хранятся переменные окружения
     env_file:
       - ./.env
   web:
@@ -23,9 +19,9 @@ services:
     command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
     ports:
       - "8000:8000"
-    # "зависит от",
     volumes:
       - static_value:/code/static/
+      - nginx:/code/nginx/
     depends_on:
       - db
     env_file:
@@ -35,12 +31,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      # копируем подготовленный конфиг
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_value:/var/html/static/
     depends_on:
       - web
-
-volumes:
-  postgres_data:
-  static_value:
