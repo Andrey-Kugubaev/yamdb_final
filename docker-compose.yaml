@@ -3,13 +3,12 @@ version: '3.8'
 services:
   db:
     image: postgres:12.4
-    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
   web:
-    build: .
+    image: grinandrey/yamdb_final:latest
     restart: always
     command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
     ports:
