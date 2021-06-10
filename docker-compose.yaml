@@ -16,8 +16,6 @@ services:
     volumes:
       - static_value:/code/static/
       - media_value:/code/media/
-    expose:
-      - 8000
     depends_on:
       - db
     env_file:
