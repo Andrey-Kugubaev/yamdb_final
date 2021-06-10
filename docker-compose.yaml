@@ -3,16 +3,20 @@ version: '3.8'
 services:
   db:
     image: postgres:12.4
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
   web:
     image: grinandrey/yamdb_final:latest
+    container_name: web
     restart: always
     volumes:
       - static_value:/code/static/
       - media_value:/code/media/
+    expose:
+      - 8000
     depends_on:
       - db
     env_file:
