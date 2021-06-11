@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:12.4
     container_name: db
+    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
@@ -12,7 +13,6 @@ services:
     image: grinandrey/yamdb_final:latest
     container_name: web
     restart: always
-    command: gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_value:/code/static/
       - media_value:/code/media/
@@ -22,8 +22,9 @@ services:
       - ./.env
   nginx:
     image: nginx:1.19.3
+    restart: always
     ports:
-      - '80:80'
+      - 80:80
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_value:/var/html/static/
